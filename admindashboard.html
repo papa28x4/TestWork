@@ -346,12 +346,9 @@
                         }
                     })
                 
-                    // for(let user of userData){
-                    //     dataHTML += `<tr><td>${user.name}</td><td>${user.tracks}</td></tr>`
-                    // }
                     tableBody.innerHTML = dataHTML;
                 }
-                // loadTable(userData) 
+                
 
             //A series of functions which work in tandem to sort data when a table column header is clicked
                 const sortColumn =(columnName,userData,tableBody)=>{
@@ -388,18 +385,20 @@
                 
                 tableHeaders.forEach(tableHeader => {
                     tableHeader.addEventListener('click', (e)=>{
+                    
+                    if(e.target.tagName == 'I'){
                         const tableBody = e.target.parentElement.parentElement.parentElement.nextElementSibling
                         const columnName = e.target.parentElement.dataset.heading
-                    if(e.target.parentElement.classList.contains('prop-mentor')){
-                        sortColumn(columnName, mentorData,tableBody)
-                    }else if(e.target.parentElement.classList.contains('prop-intern')){
-                        sortColumn(columnName, internData, tableBody)
-                    }
-                    Array.from(e.target.parentElement.children).forEach(child=>{
-                        child.style.display = ""
-                    })
-                    e.target.style.display = "none"         
-                
+                        if(e.target.parentElement.classList.contains('prop-mentor')){
+                            sortColumn(columnName, mentorData,tableBody)
+                        }else if(e.target.parentElement.classList.contains('prop-intern')){
+                            sortColumn(columnName, internData, tableBody)
+                        }
+                            Array.from(e.target.parentElement.children).forEach(child=>{
+                            child.style.display = ""
+                        })
+                            e.target.style.display = "none"         
+                        }
                 })
             })
 
