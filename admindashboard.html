@@ -42,18 +42,24 @@
         </div>  
 
     <!-- Mentor Table-->
-    <p class="table_title">Mentors</p>
+    <h2 class="table_title">Mentors</h2>
         <div class="tables">
             <div id="table_mentors" style="overflow-x:auto;" >
                 <table class="table" >
                     <thead class="table-headers">
                     <tr class="table-input">
-                        <th scope="col" class="prop-mentor">SN</th>
-                        <th scope="col" class="prop-mentor">Name</th>
-                        <th scope="col" class="prop-mentor">Tracks</th>
-                        <th scope="col" class="prop-mentor">Sex</th>
-                        <th scope="col" class="prop-mentor">Phone</th>
-                        <th scope="col" class="prop-mentor">State</th>
+                        <th scope="col" data-heading= "sn" class="prop-mentor">SN <i class="fa fa-fw fa-sort-up"></i>
+                            <i class="fa fa-fw fa-sort-down"></i></th>
+                        <th scope="col" data-heading= "name"  class="prop-mentor">Name <i class="fa fa-fw fa-sort-up"></i>
+                            <i class="fa fa-fw fa-sort-down"></i></th>
+                        <th scope="col" data-heading= "tracks"  class="prop-mentor">Tracks <i class="fa fa-fw fa-sort-up"></i>
+                            <i class="fa fa-fw fa-sort-down"></i></th>
+                        <th scope="col" data-heading= "sex"  class="prop-mentor">Sex <i class="fa fa-fw fa-sort-up"></i>
+                            <i class="fa fa-fw fa-sort-down"></i></th>
+                        <th scope="col" data-heading= "phone"  class="prop-mentor">Phone <i class="fa fa-fw fa-sort-up"></i>
+                            <i class="fa fa-fw fa-sort-down"></i></th>
+                        <th scope="col" data-heading= "state"  class="prop-mentor">State <i class="fa fa-fw fa-sort-up"></i>
+                            <i class="fa fa-fw fa-sort-down"></i></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -125,18 +131,24 @@
        
     
     <!--Intern Table-->
-    <p class="table_title">Interns</p>
+    <h2 class="table_title">Interns</h2>
     <div class="tables" >
         <div id="table_interns" style="overflow-x:auto;" ><
             <table class="table">
                 <thead class="table-headers">
                 <tr class="table-input">
-                    <th scope="col" class="prop-intern">SN</th>
-                    <th scope="col" class="prop-intern">Name</th>
-                    <th scope="col" class="prop-intern">Tracks</th>
-                    <th scope="col" class="prop-intern">Sex</th>
-                    <th scope="col" class="prop-intern">Phone</th>
-                    <th scope="col" class="prop-intern">State</th>
+                    <th scope="col" data-heading= "sn" class="prop-intern">SN <i class="fa fa-fw fa-sort-up"></i>
+                    <i class="fa fa-fw fa-sort-down"></i></th>
+                    <th scope="col" data-heading= "name" class="prop-intern">Name<i class="fa fa-fw fa-sort-up"></i>
+                        <i class="fa fa-fw fa-sort-down"></i></th>
+                    <th scope="col" data-heading= "tracks" class="prop-intern">Tracks<i class="fa fa-fw fa-sort-up"></i>
+                        <i class="fa fa-fw fa-sort-down"></i></th>
+                    <th scope="col" data-heading= "sex" class="prop-intern">Sex<i class="fa fa-fw fa-sort-up"></i>
+                        <i class="fa fa-fw fa-sort-down"></i></th>
+                    <th scope="col" data-heading= "phone" class="prop-intern">Phone<i class="fa fa-fw fa-sort-up"></i>
+                        <i class="fa fa-fw fa-sort-down"></i></th>
+                    <th scope="col" data-heading= "state" class="prop-intern">State<i class="fa fa-fw fa-sort-up"></i>
+                        <i class="fa fa-fw fa-sort-down"></i></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -257,8 +269,7 @@
             </nav>
             <p class="center-text darkblue-text">&copy 2019, HGN Internship. All rights reserved.</p>
         </footer> -->
-        <i class="fa fa-fw fa-sort-down"></i>
-        <i class="fa fa-fw fa-sort-up"></i>
+       
         <script src="js/jquery-2.1.3.js"></script>
         <script src="js/jspdf.js"></script>
         <script src="js/jspdf.plugin.autotable.min.js"></script>
@@ -269,7 +280,7 @@
                 const mentorTable = document.querySelector("#table_mentors table")
                 const internTable = document.querySelector("#table_interns table")
                 const tableHeaders = document.querySelectorAll('.table-headers');
-                let sortDirection = false;
+                let sortDirection = true;
                 
                 //To create pages for the Mentor and Intern tables
                 const createPages =(tableDivId)=>{
@@ -290,8 +301,11 @@
                     let data = [];
                     // first row needs to be headers
                     let headers = [];
+                    let test = [];
                     for(let i=0; i<table.rows[0].cells.length; i++){
-                        headers[i]=table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+                        // headers[i]=table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+                        headers[i]=table.rows[0].cells[i].dataset.heading
+                        
                     }
                         data.push(headers);
                     //iterate through the cells
@@ -374,7 +388,7 @@
                 tableHeaders.forEach(tableHeader => {
                     tableHeader.addEventListener('click', (e)=>{
                         const tableBody = e.target.parentElement.parentElement.nextElementSibling
-                        const columnName = e.target.innerHTML.toLowerCase().replace(/ /gi,'')
+                        const columnName = e.target.dataset.heading
                     if(e.target.classList.contains('prop-mentor')){
                         sortColumn(columnName, mentorData,tableBody)
                     }else if(e.target.classList.contains('prop-intern')){
@@ -382,6 +396,8 @@
                     }
                 })
             })
+
+            
 
              //EXPORT TO PDF             
              const genPDF =()=>{
