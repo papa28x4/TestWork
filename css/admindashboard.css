@@ -77,21 +77,9 @@ i{
     position: absolute;
     margin-left: 10px;
     cursor: pointer;
-    border: 1px solid red;
-}
-
-.fa-sort-down{
-    /* display: none; */
-
-}
-
-.fa-sort-up{
-    /* display: none; */
-    /* z-index: 5; */
+    
 }
 
 i:hover{
-    color:blue;
-    
-    
+    color:blue;    
 }

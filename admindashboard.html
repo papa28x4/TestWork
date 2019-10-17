@@ -280,7 +280,7 @@
                 const mentorTable = document.querySelector("#table_mentors table")
                 const internTable = document.querySelector("#table_interns table")
                 const tableHeaders = document.querySelectorAll('.table-headers');
-                let sortDirection = true;
+                let sortDirection = false;
                 
                 //To create pages for the Mentor and Intern tables
                 const createPages =(tableDivId)=>{
@@ -356,7 +356,8 @@
             //A series of functions which work in tandem to sort data when a table column header is clicked
                 const sortColumn =(columnName,userData,tableBody)=>{
                     const dataType = typeof userData[1][columnName];
-                    console.log(userData[1][columnName], dataType)
+                    // console.log(userData[1][columnName], dataType)
+                    
                     sortDirection = !sortDirection;
 
                     switch(dataType){
@@ -365,7 +366,6 @@
                             break;
                         case 'string':
                             sortStringColumn(sortDirection, columnName,userData);
-                            console.log('I came here')
                             break;
                     }
                     loadTable(userData,tableBody)
@@ -384,16 +384,22 @@
                         userData = userData.sort((u1, u2)=> (u1[columnName] > u2[columnName]) ? 1: ((u2[columnName] > u1[columnName])? -1 : 0 )).reverse()
                     }
                 }
+
                 
                 tableHeaders.forEach(tableHeader => {
                     tableHeader.addEventListener('click', (e)=>{
-                        const tableBody = e.target.parentElement.parentElement.nextElementSibling
-                        const columnName = e.target.dataset.heading
-                    if(e.target.classList.contains('prop-mentor')){
+                        const tableBody = e.target.parentElement.parentElement.parentElement.nextElementSibling
+                        const columnName = e.target.parentElement.dataset.heading
+                    if(e.target.parentElement.classList.contains('prop-mentor')){
                         sortColumn(columnName, mentorData,tableBody)
-                    }else if(e.target.classList.contains('prop-intern')){
+                    }else if(e.target.parentElement.classList.contains('prop-intern')){
                         sortColumn(columnName, internData, tableBody)
                     }
+                    Array.from(e.target.parentElement.children).forEach(child=>{
+                        child.style.display = ""
+                    })
+                    e.target.style.display = "none"         
+                
                 })
             })
 
