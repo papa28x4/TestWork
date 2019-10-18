@@ -7,20 +7,22 @@
     <title>Admin Dashboard</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link rel="stylesheet" href="table-paginator-master/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/header-footer.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/header-footer.css"> -->
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/admindashboard.css">
+    
     <link rel="icon" type="img/png" href="images/hng-favicon.png">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
 
 </head>
 <body>
-    <header>
+    <!-- <header>
         <a href="index.html"><img id="hng-logo"
           src="https://res.cloudinary.com/phiileo/image/upload/v1571147073/brand-logo_tx0mdt.png"></a>
         <input type="checkbox" id="mobile-bars-check" />
         <label for="mobile-bars-check" id="mobile-bars">
-         <!--img src="images/ bars-icon.png" height="23px"-->
+         img src="images/ bars-icon.png" height="23px"
          <div class="stix" id="stik1"></div>
          <div class="stix" id="stik2"></div>
          <div class="stix" id="stik3"></div>
@@ -30,21 +32,43 @@
             <a href="hng6.html" class="header-links">HNG 6</a>
             <a href="mentorpage.html" class="header-links">Mentors</a>
             <a href="contactform.html" class="header-links">Contact</a>
-            <a href="join-intern.html" id="join-hng" class="def-button">Join HNG</a>
+            <a href="join-intern.html" id="join-hng" class="def-button">Join HNG</a> 
+           
         </nav>
-       </header>
+       </header> -->
 
     <!--Side Bar-->
-        <div class= container row>
-            <div class="side-bar">
-
-            </div>
-        </div>  
+    <input type="checkbox" id="mobile-bars-check" />
+    <label for="mobile-bars-check" id="mobile-bars">
+        <div class="stix" id="stik1"></div>
+        <div class="stix" id="stik2"></div>
+        <div class="stix" id="stik3"></div>
+    </label>
+    <section id="sidebar">
+		<div id="upper">
+			<img src="https://res.cloudinary.com/jaycodist/image/upload/v1570722683/mentors-first_qlquq9.png" height="100px">
+			<div id="username">Seyi Onifade</div>
+			<em>Admin</em>
+		</div>
+		<nav id="lower">
+			<a href="#">Mentors</a>
+			<a href="#">Users</a>
+			<select>
+				<option selected="selected" disabled="disabled">Overview</option>
+				<option value="0">Mentors</option>
+				<option value="1">Users</option>
+			</select>
+			<a href="#">Advanced</a>
+			<a href="#">Logout</a>
+		</nav>
+	</section>
 
     <!-- Mentor Table-->
-    <h2 class="table_title">Mentors</h2>
+    
         <div class="tables">
-            <div id="table_mentors" style="overflow-x:auto;" >
+            <h2 class="table_title">Mentors</h2>
+            <div id="table_mentors">
+                <div class="scroll">
                 <table class="table" >
                     <thead class="table-headers">
                     <tr class="table-input">
@@ -119,21 +143,24 @@
                         <td>08132149955</td>
                         <td>Benue</td>
                     </tr>
+                    
                     </tbody>
                 </table>
+                </div>
             </div>
-            
             <div class="m-5">
                 <button type="button" id="exportMentors" class="btn btn-lg">Export +</button>
             </div>
+            
         </div>
     <!--Button-->
        
-    
     <!--Intern Table-->
-    <h2 class="table_title">Interns</h2>
+    
     <div class="tables" >
-        <div id="table_interns" style="overflow-x:auto;" ><
+        <h2 class="table_title">Interns</h2>
+        <div id="table_interns">
+            <div class="scroll">
             <table class="table">
                 <thead class="table-headers">
                 <tr class="table-input">
@@ -194,7 +221,7 @@
                 </tr>
                 <tr class="table-input">
                     <th scope="row">6</th>
-                    <td>felicia Osagie</td>
+                    <td>Felicia Osagie</td>
                     <td>UI/UX</td>
                     <td>Female</td>
                     <td>08063949272</td>
@@ -210,6 +237,7 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
         </div>
         
         <div class="m-5">
@@ -270,10 +298,10 @@
             <p class="center-text darkblue-text">&copy 2019, HGN Internship. All rights reserved.</p>
         </footer> -->
        
-        <script src="js/jquery-2.1.3.js"></script>
+        <script src="js/jquery-3.4.1.js"></script>
         <script src="js/jspdf.js"></script>
         <script src="js/jspdf.plugin.autotable.min.js"></script>
-        <script src="table-paginator-master/paginator.js"></script>
+        <script src="js/paginator.js"></script>
         <script>
                 
 
@@ -295,7 +323,7 @@
                 createPages('table_mentors')
                 createPages('table_interns')
                 
-
+                
                 //To convert the HTML tables to an Array of Objects
                 const tableToArray=(table)=>{
                     let data = [];
@@ -303,11 +331,12 @@
                     let headers = [];
                     let test = [];
                     for(let i=0; i<table.rows[0].cells.length; i++){
-                        // headers[i]=table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+            
                         headers[i]=table.rows[0].cells[i].dataset.heading
                         
                     }
                         data.push(headers);
+
                     //iterate through the cells
                     for(let i=1; i<table.rows.length; i++){
                         let tableRow = table.rows[i];
@@ -328,7 +357,7 @@
                 
             //This function creates tableRows when fed an array of objects. 
                 const loadTable=(userData, tableBody)=>{
-                    // const tableBody = document.querySelector('#tableData')
+                    
                     let sn = 1
                     let dataHTML = '';
                     userData.forEach((user, index)=>{
@@ -342,18 +371,15 @@
                                             <td>${user.phone}</td>
                                             <td>${user.state}</td>
                                         </tr>`
-                            
                         }
                     })
-                
                     tableBody.innerHTML = dataHTML;
                 }
                 
 
-            //A series of functions which work in tandem to sort data when a table column header is clicked
+            //Series of functions which work in tandem to sort data when sortup or sort down icon is clicked
                 const sortColumn =(columnName,userData,tableBody)=>{
                     const dataType = typeof userData[1][columnName];
-                    // console.log(userData[1][columnName], dataType)
                     
                     sortDirection = !sortDirection;
 
